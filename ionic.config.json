@@ -1,0 +1,7 @@
+{
+  "name": "vente-organe",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
