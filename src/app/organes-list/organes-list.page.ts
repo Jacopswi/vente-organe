@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { OrganesService } from '../organes.service';
 
 @Component({
   selector: 'app-organes-list',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrganesListPage implements OnInit {
 
-  constructor() { }
+  organes: any = [];
+  organesSubscription: Subscription | undefined;
+
+  constructor(private Organe : OrganesService) {
+
+   }
 
   ngOnInit() {
+    this.Organe.getAll().subscribe((data) => {
+      this.organes = data;
+    });
   }
 
 }

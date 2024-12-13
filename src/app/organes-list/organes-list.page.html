@@ -11,6 +11,22 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-list>
+    <ion-item *ngFor="let organe of organes">
+      <ion-label>
+        <h2>{{ organe.organe }}</h2>
+        <h2>{{ organe.quantite }}</h2>
+        <h2>{{ organe.etat }}</h2>
+
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Si la liste est vide -->
+  <div *ngIf="organes.length === 0" class="empty-state">
+    <p>Aucun organe trouvé.</p>
+  </div>
+
   <ion-button routerLink="/">Retour au menu</ion-button>
 
 </ion-content>
