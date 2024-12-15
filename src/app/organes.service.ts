@@ -23,9 +23,18 @@ export class OrganesService {
   }
 
   addOrgan(organ: Organes): Promise<void> {
-    const id = this.firestore.createId(); // Création d'un ID unique
+    const id = this.firestore.createId();
     return this.organesData.doc(id).set(organ);
   }
+
+  deleteOrgan(id: string): Promise<void> {
+    return this.firestore.collection('vente-organe').doc(id).delete();
+  }
+
+  updateOrgan(id: string, updatedData: any): Promise<void> {
+    return this.firestore.collection('vente-organe').doc(id).update(updatedData);
+  }
+
 
 
 

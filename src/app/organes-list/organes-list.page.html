@@ -11,22 +11,38 @@
     </ion-toolbar>
   </ion-header>
 
+  <!-- Liste des organes -->
   <ion-list>
     <ion-item *ngFor="let organe of organes">
       <ion-label>
-        <h2>{{ organe.organe }}</h2>
-        <h2>{{ organe.quantite }}</h2>
-        <h2>{{ organe.etat }}</h2>
-
+        <h2>Organe : {{ organe.organe }}</h2>
+        <p>Quantité : {{ organe.quantite }}</p>
+        <p>État : {{ organe.etat }}</p>
       </ion-label>
+
+      <!-- Bouton Modifier -->
+      <ion-button color="primary" slot="end" (click)="editOrgane(organe)">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
+
+      <!-- Bouton Supprimer -->
+      <ion-button color="danger" slot="end" (click)="deleteOrgane(organe.id)">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
 
-  <!-- Si la liste est vide -->
-  <div *ngIf="organes.length === 0" class="empty-state">
+  <!-- État vide -->
+  <div *ngIf="organes.length === 0" class="empty-state ion-text-center">
     <p>Aucun organe trouvé.</p>
   </div>
 
-  <ion-button routerLink="/">Retour au menu</ion-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="" [routerLink]="['/organes-form']">
+      <ion-icon name="add-outline" style="font-size: 50px;"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
+  <!-- Bouton retour -->
+  <ion-button routerLink="/" expand="full">Retour au menu</ion-button>
 </ion-content>
