@@ -14,7 +14,11 @@ const routes: Routes = [
   {
     path: 'organes-list',
     loadChildren: () => import('./organes-list/organes-list.module').then( m => m.OrganesListPageModule)
+  },  {
+    path: 'organes-form',
+    loadChildren: () => import('./organes-form/organes-form.module').then( m => m.OrganesFormPageModule)
   },
+
 ];
 
 @NgModule({

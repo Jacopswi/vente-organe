@@ -22,6 +22,13 @@ export class OrganesService {
     return this.organesData.valueChanges({idField: 'id'}) as Observable<Organes[]>;
   }
 
+  addOrgan(organ: Organes): Promise<void> {
+    const id = this.firestore.createId(); // Création d'un ID unique
+    return this.organesData.doc(id).set(organ);
+  }
+
+
+
   /*getOrganes() {
     return collectionData(this.organesCollection, { idField: 'id' }).pipe(  // Utiliser collectionData ici
       map((items: any) => {

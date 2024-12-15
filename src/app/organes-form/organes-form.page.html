@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ajouter un organe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="organForm" (ngSubmit)="onSubmit()" class="ion-padding">
+    <ion-item>
+      <ion-label position="floating">Organe</ion-label>
+      <ion-input formControlName="organe" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Etat</ion-label>
+      <ion-input formControlName="etat" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Quantite</ion-label>
+      <ion-input formControlName="quantite" type="number"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="organForm.invalid">
+      Ajouter
+    </ion-button>
+  </form>
+</ion-content>
