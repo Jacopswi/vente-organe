@@ -1,5 +1,4 @@
 <ion-header [translucent]="true">
-
   <ion-toolbar>
     <ion-title>
       Accueil
@@ -14,9 +13,24 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-button routerLink="/organes-list">Liste des organes</ion-button>
-  <ion-button routerLink="/organes-form">Ajouter un organe</ion-button>
+  <div class="welcome-container" style="display: flex; justify-content: center; align-items: center; flex-direction: column; height: 200px; text-align: center;">
+    <h1>Bienvenue sur votre gestionnaire de vente d'organes</h1>
+  </div>
 
+  <div class="button-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: calc(100vh - 300px); gap: 20px;">
+    <ion-button color="secondary" expand="block" [routerLink]="['/organes-list']" style="width: 200px;">
+      <ion-icon name="list-outline" slot="start"></ion-icon>
+      Liste des organes
+    </ion-button>
 
+    <ion-button color="primary" expand="block" [routerLink]="['/organes-form']" style="width: 200px;">
+      <ion-icon name="add-outline" slot="start"></ion-icon>
+      Ajouter un organe
+    </ion-button>
 
+    <ion-button color="tertiary" expand="block" [routerLink]="['/wallet']" style="width: 200px;">
+      <ion-icon name="wallet-outline" slot="start"></ion-icon>
+      Portefeuille
+    </ion-button>
+  </div>
 </ion-content>

@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'organes-form',
     loadChildren: () => import('./organes-form/organes-form.module').then( m => m.OrganesFormPageModule)
   },
+  {
+    path: 'wallet',
+    loadChildren: () => import('./wallet/wallet.module').then( m => m.WalletPageModule)
+  },
 
 ];
 
