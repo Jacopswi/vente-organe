@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrganesService } from '../organes.service';
 import { Organes } from '../models/organes.model';
-import { ToastController } from '@ionic/angular';
+import { ToastController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-organes-form',
@@ -15,12 +15,15 @@ export class OrganesFormPage {
   constructor(
     private fb: FormBuilder,
     private organesService: OrganesService,
-    private toastController: ToastController // Pour les notifications
+    private toastController: ToastController,
+    private navCtrl: NavController
   ) {
     this.organForm = this.fb.group({
       organe: ['', Validators.required],
       etat: ['', Validators.required],
-      quantite: ['', [Validators.required, Validators.min(0)]],
+      quantite: ['', [Validators.required, Validators.min(1)]],
+      prix: ['', [Validators.required, Validators.min(1)]],
+
     });
   }
 
@@ -32,6 +35,7 @@ export class OrganesFormPage {
         await this.organesService.addOrgan(newOrgan);
         this.showToast('Organe ajouté avec succès !');
         this.organForm.reset();
+        this.navCtrl.back();
       } catch (error : any) {
         this.showToast('Erreur : ' + error.message);
       }

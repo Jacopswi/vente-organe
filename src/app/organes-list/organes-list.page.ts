@@ -9,7 +9,6 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./organes-list.page.scss'],
 })
 export class OrganesListPage implements OnInit {
-
   organes: any = [];
   organesSubscription: Subscription | undefined;
 
@@ -22,22 +21,41 @@ export class OrganesListPage implements OnInit {
     this.fetchOrganes();
   }
 
-  // Récupération des organes
   fetchOrganes() {
     this.organesService.getAll().subscribe((data) => {
       this.organes = data;
     });
   }
 
-  // Suppression d'un organe
-  deleteOrgane(id: string) {
-    this.organesService.deleteOrgan(id).then(() => {
-      console.log('Organe supprimé');
-      this.fetchOrganes();
+  async deleteOrgane(id: string) {
+    const alert = await this.alertController.create({
+      header: 'Confirmer la suppression',
+      message:
+        'Êtes-vous sûr de vouloir supprimer cet organe ? Cette action est irréversible.',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel', 
+          handler: () => {
+            console.log('Suppression annulée');
+          },
+        },
+        {
+          text: 'Supprimer',
+          role: 'destructive', 
+          handler: () => {
+            this.organesService.deleteOrgan(id).then(() => {
+              console.log('Organe supprimé');
+              this.fetchOrganes(); 
+            });
+          },
+        },
+      ],
     });
+
+    await alert.present();
   }
 
-  // Modification d'un organe avec une alerte
   async editOrgane(organe: any) {
     const alert = await this.alertController.create({
       header: 'Modifier Organe',
@@ -46,40 +64,49 @@ export class OrganesListPage implements OnInit {
           name: 'organe',
           type: 'text',
           value: organe.organe,
-          placeholder: 'Nom de l\'organe'
+          placeholder: "Nom de l'organe",
         },
         {
           name: 'quantite',
           type: 'number',
           value: organe.quantite,
-          placeholder: 'Quantité'
+          placeholder: 'Quantité',
         },
         {
           name: 'etat',
           type: 'text',
           value: organe.etat,
-          placeholder: 'État de l\'organe'
-        }
+          placeholder: "État de l'organe",
+        },
+        {
+          name: 'prix',
+          type: 'number',
+          value: organe.prix,
+          placeholder: "Prix de l'organe",
+        },
       ],
       buttons: [
         {
           text: 'Annuler',
-          role: 'cancel'
+          role: 'cancel',
         },
         {
           text: 'Modifier',
           handler: (data) => {
-            this.organesService.updateOrgan(organe.id, {
-              organe: data.organe,
-              quantite: data.quantite,
-              etat: data.etat
-            }).then(() => {
-              console.log('Organe modifié');
-              this.fetchOrganes(); // Mise à jour de la liste
-            });
-          }
-        }
-      ]
+            this.organesService
+              .updateOrgan(organe.id, {
+                organe: data.organe,
+                quantite: data.quantite,
+                etat: data.etat,
+                prix: data.prix,
+              })
+              .then(() => {
+                console.log('Organe modifié');
+                this.fetchOrganes(); // Mise à jour de la liste
+              });
+          },
+        },
+      ],
     });
 
     await alert.present();

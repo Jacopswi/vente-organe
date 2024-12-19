@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
     <ion-title>Ajouter un organe</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -19,6 +22,11 @@
     <ion-item>
       <ion-label position="floating">Quantite</ion-label>
       <ion-input formControlName="quantite" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Prix</ion-label>
+      <ion-input formControlName="prix" type="number"></ion-input>
     </ion-item>
 
     <ion-button expand="full" type="submit" [disabled]="organForm.invalid">
